@@ -2,6 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:products_frontend/shared/repositories/products/products_client.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../dio/dio.provider.dart';
+
 part 'products_client.provider.g.dart';
 
 @riverpod

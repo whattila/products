@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:products_frontend/features/product_list/models/product_header.dart';
 
-part 'product_list_response.header.freezed.dart';
+part 'product_list_response.freezed.dart';
 part 'product_list_response.g.dart';
 
 @freezed

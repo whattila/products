@@ -1,5 +1,7 @@
 import 'package:dio/dio.dart';
 
+import '../widgets/network_issue.dart';
+
 class DioErrorHandler {
   static String _handleResponseError(DioError e) {
     assert(e.type == DioErrorType.badResponse, '_handleResponseError can only handle type of DioErrorType.response');
