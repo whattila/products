@@ -67,7 +67,7 @@ class ProductDetailsBody extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   SizedBox(
-                    height: 100,
+                    height: 230,
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: product.otherImageUris.length,
@@ -76,7 +76,7 @@ class ProductDetailsBody extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 4.0),
                           child: CachedNetworkImage(
                             imageUrl: 'http://10.0.2.2:3000/${product.otherImageUris[index]}.jpg',
-                            width: 100,
+                            width: 230,
                             fit: BoxFit.cover,
                             placeholder: (context, url) => const CircularProgressIndicator(),
                             errorWidget: (context, url, error) => const Icon(Icons.error),

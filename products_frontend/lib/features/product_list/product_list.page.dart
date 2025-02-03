@@ -82,7 +82,6 @@ class _ProductListPageState extends ConsumerState<ProductListPage> {
               itemBuilder: (_, item, index) {
                 return GestureDetector(
                   onTap: () {
-                    print((item).id);
                     context.router.push(ProductDetailsRoute(productId: (item).id));
                   },
                   child: _ProductItem(productHeader: item as ProductHeader),
@@ -122,9 +121,24 @@ class _ProductItem extends StatelessWidget {
           placeholder: (context, url) => const CircularProgressIndicator(),
           errorWidget: (context, url, error) => const Icon(Icons.error),
         ),
-        Text(productHeader.name),
-        Text('${productHeader.price}'),
-        Text('${productHeader.percent}% - ${productHeader.left} left')
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: Text(
+            productHeader.name,
+            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: Text(
+            '${productHeader.price}',
+            style: const TextStyle(fontSize: 16, color: Colors.blue),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 15.0),
+          child: Text('${productHeader.percent}% - ${productHeader.left} left'),
+        ),
       ],
     );
   }
