@@ -1,6 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
+import 'package:products_frontend/features/product_list/models/product_header.dart';
 import 'package:products_frontend/shared/repositories/products/products_client.provider.dart';
 import '../../../../shared/dio/dio_error_handler.dart';
 import '../../shared/repositories/products/products_client.dart';
@@ -69,15 +71,27 @@ class _ProductListPageState extends ConsumerState<ProductListPage> {
             title: const Text("Pagination Scroll Flutter Template"),
           ),
           // Page Listview with divider as a separation
-          body: PagedListView<int, dynamic>.separated(
+          body: PagedGridView(
+            shrinkWrap: true,
             pagingController: _pagingController,
             builderDelegate: PagedChildBuilderDelegate<dynamic>(
               animateTransitions: true,
-              itemBuilder: (_, item, index) => const ListTile(
-                title: Text('Product'),
-              ),
+              itemBuilder: (_, item, index) {
+                return GestureDetector(
+                  onTap: () {},
+                  child: CachedNetworkImage(
+                    imageUrl: 'http://10.0.2.2:3000/image1.jpg',
+                    placeholder: (context, url) => const CircularProgressIndicator(),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                  ),
+                );
+              }
             ),
-            separatorBuilder: (_, index) => const Divider(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisSpacing: 0,
+              mainAxisSpacing: 2,
+              crossAxisCount: 2,
+            ),
           ),
         ),
       );
