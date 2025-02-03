@@ -71,7 +71,7 @@ class _ProductListPageState extends ConsumerState<ProductListPage> {
         ),
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("Pagination Scroll Flutter Template"),
+            title: const Text("Products", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
           ),
           // Page Listview with divider as a separation
           body: PagedGridView(
@@ -131,7 +131,7 @@ class _ProductItem extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 15.0),
           child: Text(
-            '${productHeader.price}',
+            '\$${productHeader.price}',
             style: const TextStyle(fontSize: 16, color: Colors.blue),
           ),
         ),
