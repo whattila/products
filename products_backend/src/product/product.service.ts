@@ -33,6 +33,6 @@ export class ProductService {
     }
 
     _createProductHeader(product: Product): ProductHeader {
-        return new ProductHeader(product.id, product.name, product.price, product.percent, product.left);
+        return new ProductHeader(product.id, product.name, product.price, product.percent, product.left, product.frontImageUri);
     }
 }

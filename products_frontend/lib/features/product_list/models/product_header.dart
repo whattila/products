@@ -10,7 +10,8 @@ class ProductHeader with _$ProductHeader {
     required String name,
     required int price,
     required int percent,
-    required int left
+    required int left,
+    required String frontImageUri
   }) = _ProductHeader;
 
   factory ProductHeader.fromJson(Map<String, Object?> json)

@@ -1,13 +1,16 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
-import 'package:products_frontend/features/product_list/models/product_header.dart';
 import 'package:products_frontend/shared/repositories/products/products_client.provider.dart';
 import '../../../../shared/dio/dio_error_handler.dart';
 import '../../shared/repositories/products/products_client.dart';
+import '../../shared/router/router.dart';
 import '../../shared/widgets/snack.dart';
+import 'models/product_header.dart';
 
+@RoutePage()
 class ProductListPage extends ConsumerStatefulWidget {
   const ProductListPage({super.key});
 
@@ -78,19 +81,19 @@ class _ProductListPageState extends ConsumerState<ProductListPage> {
               animateTransitions: true,
               itemBuilder: (_, item, index) {
                 return GestureDetector(
-                  onTap: () {},
-                  child: CachedNetworkImage(
-                    imageUrl: 'http://10.0.2.2:3000/image1.jpg',
-                    placeholder: (context, url) => const CircularProgressIndicator(),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
-                  ),
+                  onTap: () {
+                    print((item).id);
+                    context.router.push(ProductDetailsRoute(productId: (item).id));
+                  },
+                  child: _ProductItem(productHeader: item as ProductHeader),
                 );
               }
             ),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisSpacing: 0,
-              mainAxisSpacing: 2,
+              crossAxisSpacing: 10,
+              mainAxisSpacing: 6,
               crossAxisCount: 2,
+              childAspectRatio: 0.7
             ),
           ),
         ),
@@ -100,5 +103,29 @@ class _ProductListPageState extends ConsumerState<ProductListPage> {
   void dispose() {
     _pagingController.dispose();
     super.dispose();
+  }
+}
+
+class _ProductItem extends StatelessWidget {
+  const _ProductItem({super.key, required this.productHeader});
+
+  final ProductHeader productHeader;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        CachedNetworkImage(
+          imageUrl: 'http://10.0.2.2:3000/${productHeader.frontImageUri}.jpg',
+          placeholder: (context, url) => const CircularProgressIndicator(),
+          errorWidget: (context, url, error) => const Icon(Icons.error),
+        ),
+        Text(productHeader.name),
+        Text('${productHeader.price}'),
+        Text('${productHeader.percent}% - ${productHeader.left} left')
+      ],
+    );
   }
 }
